@@ -1,13 +1,13 @@
 #! /usr/bin/env python
 
-# example.py - an example for NESGameLib
+# example.py - an example for RetroGamelib
 # Example code released to the public domain
 # Art is Copyright (C) 2009.
 
 import pygame
 import os
 
-# Import the modules we'll use from NESGameLib
+# Import the modules we'll use from RetroGamelib
 from retrogamelib import display
 from retrogamelib import button
 from retrogamelib import clock
