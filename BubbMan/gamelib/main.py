@@ -1,8 +1,8 @@
 import sys
 sys.path.insert(0, "..")
 
-from nesgamelib import display
-from nesgamelib.constants import *
+from retrogamelib import display
+from retrogamelib.constants import *
 import menu
 
 def main():

@@ -8,14 +8,14 @@ import os
 import sys
 
 sys.path.insert(0, "..")
-from nesgamelib import display
-from nesgamelib import button
-from nesgamelib import clock
-from nesgamelib import font
-from nesgamelib import gameobject
-from nesgamelib.constants import *
+from retrogamelib import display
+from retrogamelib import button
+from retrogamelib import clock
+from retrogamelib import font
+from retrogamelib import gameobject
+from retrogamelib.constants import *
 
-from nesgamelib.util import *
+from retrogamelib.util import *
 from objects import *
 from tileengine import *
 from levels import *

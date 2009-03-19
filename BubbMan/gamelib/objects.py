@@ -4,10 +4,10 @@ import sys
 import math
 
 sys.path.insert(0, "..")
-from nesgamelib import gameobject
-from nesgamelib import button
-from nesgamelib.constants import *
-from nesgamelib.util import *
+from retrogamelib import gameobject
+from retrogamelib import button
+from retrogamelib.constants import *
+from retrogamelib.util import *
 
 class Collidable(gameobject.Object):
     

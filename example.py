@@ -8,13 +8,13 @@ import pygame
 import os
 
 # Import the modules we'll use from NESGameLib
-from nesgamelib import display
-from nesgamelib import button
-from nesgamelib import clock
-from nesgamelib import font
-from nesgamelib import dialog
-from nesgamelib import util
-from nesgamelib.constants import *
+from retrogamelib import display
+from retrogamelib import button
+from retrogamelib import clock
+from retrogamelib import font
+from retrogamelib import dialog
+from retrogamelib import util
+from retrogamelib.constants import *
 
 class Player(object):
     

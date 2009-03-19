@@ -6,15 +6,15 @@ import random
 import pygame
 
 sys.path.insert(0, "..")
-import nesgamelib
-from nesgamelib.gameobject import Object
-from nesgamelib import display
-from nesgamelib import button
-from nesgamelib.constants import *
-from nesgamelib import geometry
-from nesgamelib import clock
-from nesgamelib.util import play_music, play_sound
-from nesgamelib.camera import Camera
+import retrogamelib
+from retrogamelib.gameobject import Object
+from retrogamelib import display
+from retrogamelib import button
+from retrogamelib.constants import *
+from retrogamelib import geometry
+from retrogamelib import clock
+from retrogamelib.util import play_music, play_sound
+from retrogamelib.camera import Camera
 
 level = """
 ......................................................................................................................................................
@@ -449,9 +449,9 @@ def main():
     display.init(3.0, "Kontra")
     play_music("data/nes6.xm")
     
-    objects = nesgamelib.gameobject.Group()
-    platforms = nesgamelib.gameobject.Group()
-    bullets = nesgamelib.gameobject.Group()
+    objects = retrogamelib.gameobject.Group()
+    platforms = retrogamelib.gameobject.Group()
+    bullets = retrogamelib.gameobject.Group()
     
     Bullet.groups = [objects, bullets]
     Player.groups = [objects]

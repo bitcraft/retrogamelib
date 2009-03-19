@@ -8,17 +8,17 @@ import os
 import sys
 
 sys.path.insert(0, "..")
-from nesgamelib import display
-from nesgamelib import button
-from nesgamelib import clock
-from nesgamelib import font
-from nesgamelib import gameobject
-from nesgamelib import dialog
-from nesgamelib.constants import *
+from retrogamelib import display
+from retrogamelib import button
+from retrogamelib import clock
+from retrogamelib import font
+from retrogamelib import gameobject
+from retrogamelib import dialog
+from retrogamelib.constants import *
+from retrogamelib.util import *
 
 from game import *
 from levels import *
-from nesgamelib.util import *
 
 def run_menu():
         
