@@ -1,0 +1,30 @@
+body {
+font-family: Verdana, Sans Serif, Arial;
+width: 750px;
+margin: 30px auto;
+}
+
+h1, h2, h3, h4 {
+margin: 5px 0;
+font-weight: normal;
+}
+
+.nav {
+background-color: #376578;
+padding: 10px;
+-moz-border-radius: 4px;
+}
+
+.nav a:link, .nav a:visited {
+color: #ffffff;
+font-weight: bold;
+text-decoration: none;
+background-color: #558BA2;
+padding: 5px;
+-moz-border-radius: 4px;
+font-size: 12px;
+}
+
+.nav a:hover, .nav a:active {
+background-color: #5E99B1;
+}

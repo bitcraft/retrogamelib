@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <title>NESGameLib Documentation</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <h1>NES Game Library Documentation</h1>
+
+    <!-- Navigation -->
+    <div class='nav'>
+    <a href='index.html'>index</a> 
+    <a href='display.html'>display</a> 
+    <a href='button.html'>button</a> 
+    <a href='font.html'>font</a> 
+    <a href='gameobject.html'>gameobject</a> 
+    <a href='util.html'>util</a> 
+    <a href='camera.html'>camera</a> 
+    <a href='clock.html'>clock</a> 
+    <a href='geometry.html'>geometry</a> 
+    <a href='constants.html'>constants</a>
+    <a href='dialog.html'>dialog</a>
+</div>
+<br/>
+
+
+    <!-- Main content goes here -->
+    <h2>nesgamelib.camera</h2>
+        The camera module includes a Camera class which can aid in scrolling games. The Camera can follow any object with a rect, and must be used
+    when drawing objects as well in order to handle the scrolling properly.
+    
+    <blockquote>
+        <b>camera.Camera(object)</b>
+        <blockquote>
+            <b>Camera(xwindow = 80, ywindow = 80, speed = 0.05)</b><br/>
+            Initialise a new Camera object. <br />
+            <code>xwindow, ywindow</code> The number of pixels away from the tracking object the camera should stay within. If <code>xwindow</code>
+            and <code>ywindow</code> are equal to zero, the camera will always keep the character in the center of the screen.<br />
+            <code>speed</code> This is the speed at which the camera catches up to it's target.
+        </blockquote>
+        <blockquote>
+            <b>Camera.follow(target)</b><br />
+            Sets the target which the camera will follow. <br />
+            <code>target</code> The target to track. Must have a rect attribute.
+        </blockquote>
+        <blockquote>
+            <b>Camera.update()</b><br/>
+            Should be called once per frame to update where the camera is pointing.
+        </blockquote>
+        <blockquote>
+            <b>Camera.translate(rect)</b> -> return pygame.rect.Rect<br/>
+            Returns a new rect that is translated into the cameras viewports.  Should be used when drawing objects as the final position
+            an object is drawn.
+        </blockquote>
+        <blockquote>
+            <b>Camera.freeze(object)</b><br/>
+            Tells the camera that <code>object</code> is blocking the camera's movement. Useful for a boss or a cutscene.
+        </blockquote>
+        <blockquote>
+            <b>Camera.unfreeze(object)</b><br/>
+            Tells the camera that <code>object</code> is no longer blocking the camera's movement.
+        </blockquote>
+        <blockquote>
+            <b>Camera.center_at(pos)</b><br/>
+            Points the camera at a specific point. If the camera is following a target, the target is cleared.
+        </blockquote>
+        <blockquote>
+            <b></b><br/>
+        </blockquote>
+    </blockquote>
+    <a name='camera'></a>
+    
+    <!-- Footer/Copyright Notice -->
+    <br/><br/>
+    <center>Copyright &copy; 2009, pymike and saluk</center>
+
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <title>NESGameLib Documentation</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <h1>NES Game Library Documentation</h1>
+
+    <!-- Navigation -->
+    <div class='nav'>
+    <a href='index.html'>index</a> 
+    <a href='display.html'>display</a> 
+    <a href='button.html'>button</a> 
+    <a href='font.html'>font</a> 
+    <a href='gameobject.html'>gameobject</a> 
+    <a href='util.html'>util</a> 
+    <a href='camera.html'>camera</a> 
+    <a href='clock.html'>clock</a> 
+    <a href='geometry.html'>geometry</a> 
+    <a href='constants.html'>constants</a>
+    <a href='dialog.html'>dialog</a>
+</div>
+<br/>
+
+
+    <!-- Main content goes here -->
+    <h2>nesgamelib.dialog</h2>
+    This module has some useful NES/GameBoy style GUI, such as a menu and dialog box.
+    
+    <blockquote>
+        <b>dialog.Menu(object)</b> The Menu is an object that lets you create menus with selectable options.
+        <blockquote>
+            <b>__init__(font, options)</b><br/>
+            Create a new menu object. <code>font</code> should be a Font object. <code>options</code> should be a list of options. e.g. <code>["New Game", "Options", "Exit Game"]</code>
+        </blockquote>
+        <blockquote>
+            <b>draw(surface, pos, background=None, border=None)</b><br/>
+            Draws the menu to a surface. <code>surface</code> should be a pygame.Surface object. <code>pos</code> should be the position of the menu to be drawn at (e.g. <code>(x, y)</code>). <code>background</code> can be an RGB tuple for the background of the menu. <code>border</code> can be an RGB tuple for the border of the menu.
+        </blockquote>
+        <blockquote>
+            <b>move_cursor(dir)</b><br/>
+            Move the menu cursor. <code>dir</code> is the direction the cursor will move in, 1 being down, -1 being up.
+        </blockquote>
+        <blockquote>
+            <b>get_option()</b> -> return int, str<br/>
+            Returns the current option the menu cursor is on. e.g. will return 0 if the menu is on the first option, 1 if the menu is on the second option, etc. It also returns the text that the menu is on.
+        </blockquote>
+    </blockquote>
+    <blockquote>
+        <b>dialog.DialogBox(object)</b> The DialogBox is a box which displays text. It supports text scrolling and multiple pages.
+        <blockquote>
+            <b>__init__(size, background_color, border_color, font)</b><br/>
+            Create a new DialogBox object. <code>size</code> should be an (x, y) tuple the size of the box in pixels. <code>background_color</code> should be an RGB tuple for the background of the box. <code>border_color</code> should be an RGB tuple for the color of the border. <code>font</code> should be a Font object.
+        </blockquote>
+        <blockquote>
+            <b>set_scrolldelay(delay)</b><br/>
+            Change the delay of the text scrolling. <code>delay</code> should be an integer, where 0 is the lowest delay. 
+        </blockquote>
+        <blockquote>
+            <b>set_dialog(dialog)</b><br/>
+            Set the dialog to display in the box. <code>dialog</code> should be a list of dialog, e.g. <code>["This is page 1.", "This is page 2."]</code>
+        </blockquote>
+        <blockquote>
+            <b>progress()</b><br/>
+            This will trigger the next "event" of the box. e.g, if the text is scrolling, it will finish the scrolling. If the text is finished scrolling, it will progress to the next page.
+        </blockquote>
+        <blockquote>
+            <b>draw(surface, pos)</b><br/>
+            Draw the box to a surface. <code>surface</code> should be a pygame.Surface object. <code>pos</code> should be an (x, y) tuple for the box be drawn at.
+        </blockquote>
+        <blockquote>
+            <b>over()</b> -> return bool<br/>
+            Returns true/false if the dialog box has finished drawing text. (e.g. has progressed past the last page)
+        </blockquote>
+        <blockquote>
+            <b>close()</b><br/>
+            Close/finish the box immediately.
+        </blockquote>
+
+    <!-- Footer/Copyright Notice -->
+    <br/><br/>
+    <center>Copyright &copy; 2009, pymike and saluk</center>
+
+</body>
+
+</html>

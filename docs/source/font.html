@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>NESGameLib Documentation</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <h1>NES Game Library Documentation</h1>
+
+    <!-- Navigation -->
+    ..NAV
+
+    <!-- Main content goes here -->
+    <h2>nesgamelib.font</h2>
+    The font module includes a Font object for both the NES and GameBoy fonts. It works similarly to pygame's font module.
+    
+    <blockquote>
+        <b>font.Font(object)</b>
+        <blockquote>
+            <b>__init__(font, color=(255, 255, 255))</b><br/>
+            Initialise a new Font object. <code>font</code> should be one of the <a href='constants.html#fonts'>font constants</a>. <code>color</code> should be an RGB tuple for the color of the font.
+        </blockquote>
+        <blockquote>
+            <b>render(text)</b>  -> return pygame.Surface<br/>
+            Renders a string of <code>text</code>. Returns a pygame.Surface.
+        </blockquote>
+        <blockquote>
+            <b>get_width()</b>  -> return int<br/>
+            Returns the width of a single font char.
+        </blockquote>
+        <blockquote>
+            <b>get_height()</b>  -> return int<br/>
+            Returns the height of a single font char.
+        </blockquote>
+    </blockquote>
+    <a name='fonts'></a>
+    
+    <!-- Footer/Copyright Notice -->
+    <br/><br/>
+    <center>Copyright &copy; 2009, pymike and saluk</center>
+
+</body>
+
+</html>

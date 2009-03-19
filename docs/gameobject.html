@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <title>NESGameLib Documentation</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <h1>NES Game Library Documentation</h1>
+
+    <!-- Navigation -->
+    <div class='nav'>
+    <a href='index.html'>index</a> 
+    <a href='display.html'>display</a> 
+    <a href='button.html'>button</a> 
+    <a href='font.html'>font</a> 
+    <a href='gameobject.html'>gameobject</a> 
+    <a href='util.html'>util</a> 
+    <a href='camera.html'>camera</a> 
+    <a href='clock.html'>clock</a> 
+    <a href='geometry.html'>geometry</a> 
+    <a href='constants.html'>constants</a>
+    <a href='dialog.html'>dialog</a>
+</div>
+<br/>
+
+
+    <!-- Main content goes here -->
+    <h2>nesgamelib.gameobject</h2>
+    This module lets you easily add and remove objects to groups. This system is similar to pygame's Sprite module, yet simpler, and uses lists to store objects instead of dictionaries.
+    
+    <blockquote>
+        <b>gameobject.Object(object)</b>
+        <blockquote>
+            <b>__init__(groups)</b><br/>
+            Create a new Object. <code>groups</code> should be a list of <code>Group</code> objects, in which the Object is contained.
+        </blockquote>
+        <blockquote>
+            <b>alive()</b><br/>
+            Check to see if the object is "alive", or contained in a group.
+        </blockquote>
+        <blockquote>
+            <b>kill()</b><br/>
+            Removes the object from all of the groups it's been added to.
+        </blockquote>
+        <blockquote>
+            <b>update()</b><br/>
+            Dummy function, meant to be overwritten and called once every frame.
+        </blockquote>
+        <blockquote>
+            <b>draw(surface)</b><br/>
+            Another dummy function, meant to be overwritten and called for drawing.
+        </blockquote>
+    </blockquote>
+    <blockquote>
+        <b>gameobject.Group(object)</b>
+        <blockquote>
+            <b>__init__()</b><br/>
+            Create a new Group.
+        </blockquote>
+        <blockquote>
+            <b>__len__()</b><br/>
+            Allows you to execute: <code>len(group_object)</code>.
+        </blockquote>
+        <blockquote>
+            <b>__iter__()</b><br/>
+            Allows you to execute: <code>for object in group_object:</code>.
+        </blockquote>
+        <blockquote>
+            <b>__getitem__(index)</b><br/>
+            Allows you to execute: <code>group_object[i]</code>.
+        </blockquote>
+        <blockquote>
+            <b>objects()</b><br/>
+            Returns a list of all the objects contained in the Group.
+        </blockquote>
+        <blockquote>
+            <b>add(object)</b><br/>
+            Add an <code>object</code> to the group.
+        </blockquote>
+        <blockquote>
+            <b>remove(object)</b><br/>
+            Remove an <code>object</code> from the group.
+        </blockquote>
+
+    <!-- Footer/Copyright Notice -->
+    <br/><br/>
+    <center>Copyright &copy; 2009, pymike and saluk</center>
+
+</body>
+
+</html>

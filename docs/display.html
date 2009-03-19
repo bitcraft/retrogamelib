@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>NESGameLib Documentation</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <h1>NES Game Library Documentation</h1>
+
+    <!-- Navigation -->
+    <div class='nav'>
+    <a href='index.html'>index</a> 
+    <a href='display.html'>display</a> 
+    <a href='button.html'>button</a> 
+    <a href='font.html'>font</a> 
+    <a href='gameobject.html'>gameobject</a> 
+    <a href='util.html'>util</a> 
+    <a href='camera.html'>camera</a> 
+    <a href='clock.html'>clock</a> 
+    <a href='geometry.html'>geometry</a> 
+    <a href='constants.html'>constants</a>
+    <a href='dialog.html'>dialog</a>
+</div>
+<br/>
+
+
+    <!-- Main content goes here -->
+    <h2>nesgamelib.display</h2>
+    
+    <blockquote>
+        <b>display.init(scale=2.0, caption="NES Game", res=NESRES)</b><br/>
+        Sets up the pygame window and display. <code>scale</code> will scale the window up or down, while appearing to keep the same resolution. <code>caption</code> is the caption displayed on the window. <code>res</code> is the resolution of the window, defaulted at <code>constants.NESRES</code> (256x240).
+    </blockquote>
+    <blockquote>
+        <b>display.update()</b><br/>
+        Updates and draws the scene. Call this function after you're done drawing.
+    </blockquote>
+    <blockquote>
+        <b>display.get_surface()</b><br/>
+        Returns the surface for drawing onto. This is scaled up (or down) in display.update(). Always draw directly to this surface. (See the examples)
+    </blockquote>
+    
+    <!-- Footer/Copyright Notice -->
+    <br/><br/>
+    <center>Copyright &copy; 2009, pymike and saluk</center>
+
+</body>
+
+</html>

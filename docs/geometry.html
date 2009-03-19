@@ -1,0 +1,162 @@
+<html>
+
+<head>
+    <title>NESGameLib Documentation</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <h1>NES Game Library Documentation</h1>
+
+    <!-- Navigation -->
+    <div class='nav'>
+    <a href='index.html'>index</a> 
+    <a href='display.html'>display</a> 
+    <a href='button.html'>button</a> 
+    <a href='font.html'>font</a> 
+    <a href='gameobject.html'>gameobject</a> 
+    <a href='util.html'>util</a> 
+    <a href='camera.html'>camera</a> 
+    <a href='clock.html'>clock</a> 
+    <a href='geometry.html'>geometry</a> 
+    <a href='constants.html'>constants</a>
+    <a href='dialog.html'>dialog</a>
+</div>
+<br/>
+
+
+    <!-- Main content goes here -->
+    <h2>nesgamelib.geometry</h2>
+    This module provides some classes useful for physics and collision detection.
+    
+    <blockquote>
+        <b>geometry.Vector(object)</b>
+        Vectors are a mathmatical unit describing direction and magnitude.  In game programming, they often represent the speed and direction an object is moving, or the direction something is aiming. In cartesian form, they are described by an x and a y value, representing the location of the "front" of the vector, if the "back" of the vector is located at (0, 0).
+        <blockquote>
+            <b>__init__(x, y)</b><br/>
+            Creates a new vector.
+            <code>x, y</code> Is the coordinate pair that defines the vector.
+        </blockquote>
+        <blockquote>
+            <b>copy()</b> -> new Vector<br/>
+            Returns a copy of the vector.
+        </blockquote>
+        <blockquote>
+            <b>dot(other Vector)</b> -> new Vector<br/>
+            Returns a new vector that is the result of the dot product of this vector and the other vector.
+        </blockquote>
+        <blockquote>
+            <b>Vector + Vector</b> -> new Vector<br/>
+            <code>(Vector a) + (Vector b)</code> adds the two vectors and returns the result as a new vector.
+        </blockquote>
+        <blockquote>
+            <b>Vector - Vector</b> -> new Vector<br/>
+            <code>(Vector a) - (Vector b)</code> subtracts b from a and returns the result as a new vector.
+        </blockquote>
+        <blockquote>
+            <b>-Vector</b> -> new Vector<br/>
+            <code>-(Vector a)</code> returns the opposite of vector a.
+        </blockquote>
+        <blockquote>
+            <b>Vector * number</b> -> new Vector<br/>
+            <code>(Vector a) * (number c)</code> returns a copy of vector a scaled by scalar c.
+        </blockquote>
+        <blockquote>
+            <b>Vector / number</b> -> new Vector<br/>
+            <code>(Vector a) / (number c)</code> returns a copy of vector a divided by scalar c.
+        </blockquote>
+        <blockquote>
+            <b>angle()</b> -> degrees<br/>
+            Returns the polar angle of the vector.
+        </blockquote>
+        <blockquote>
+            <b>rotate(degrees)</b> -> new Vector<br/>
+            Returns a new vector that is the result of rotating this vector by degrees.
+        </blockquote>
+        <blockquote>
+            <b>magnitude()</b> -> number<br/>
+            Returns the length of the vector.
+        </blockquote>
+        <blockquote>
+            <b>normalize()</b> -> new Vector<br/>
+            Returns a new vector whose length is 1, but whose direction is equal to the direction of this vector.
+        </blockquote>
+        <blockquote>
+            <b>perpendicular()</b> -> new Vector<br/>
+            Returns a new vector that is vertically flipped.
+        </blockquote>
+        <blockquote>
+            <b></b><br/>
+        </blockquote>
+    </blockquote>
+    
+    <br /><br />
+    
+    <blockquote>
+        <b>geometry.Polygon(object)</b>
+        Polygons - many sided figure. Polygons are used for collision detection.
+        <blockquote>
+            <b>__init__(pos, points)</b><br/>
+            Creates a new polygon.
+            <code>pos</code> Is the location the polygon will be located.<br />
+            <code>points</code> - a list of pairs (x, y) which define the boundaries of the polygon. There should be as many points as there are pairs.
+        </blockquote>
+        <blockquote>
+            <b>polygon[index]</b> -> (x, y)<br/>
+            Returns the point at the provided index.
+        </blockquote>
+        <blockquote>
+            <b>get_points()</b> -> list of pairs<br/>
+            Returns a copy of the polygons points.
+        </blockquote>
+        <blockquote>
+            <b>project_to_axis(axis)</b> -> Projection<br/>
+            <code>axis</code> is a vector defining some direction (the magnitude is irrelevant). This method will return a projection
+            of the polygon onto this axis.
+            <blockquote>
+                <b>geometry.Projection</b>
+                <blockquote>
+                    <b>__init__(min, max)</b><br />
+                    <code>min</code> and <code>max</code> define a line segment in the axis that contains the projection.<br />
+                    Projection has corresponding attributes <code>min</code> and <code>max</code>.
+                </blockquote>
+                <blockquote>
+                    <b>intersection(other)</b> -> number<br />
+                    Returns how much one projection intersects with another.
+                </blockquote>
+            </blockquote>
+        </blockquote>
+        <blockquote>
+            <b>intersects(other)</b> -> intersection Vector<br/>
+            Returns a vector representing the shortest distance one polygon must be moved to no longer be intersecting with this polygon.
+        </blockquote>
+        <blockquote>
+            <b>collide(other)</b><br/>
+            Adjust our position so that we are not touching other.
+        </blockquote>
+        <blockquote>
+            <b>find_mtd(list of vectors)</b> -> Vector<br/>
+            Returns the shortest vector from a list.
+        </blockquote>
+    </blockquote>
+    
+    <br /><br />
+    
+    <blockquote>
+        <b>geometry.Rect(geometry.Polygon)</b>
+        An easy way to define a rectangular polygon.
+        <blockquote>
+            <b>__init__(x, y, width, height)</b><br />
+            Define a rectangle.
+        </blockquote>
+    </blockquote>
+
+    <!-- Footer/Copyright Notice -->
+    <br/><br/>
+    <center>Copyright &copy; 2009, pymike and saluk</center>
+
+</body>
+
+</html>

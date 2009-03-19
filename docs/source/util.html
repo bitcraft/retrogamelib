@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>NESGameLib Documentation</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <h1>NES Game Library Documentation</h1>
+
+    <!-- Navigation -->
+    ..NAV
+
+    <!-- Main content goes here -->
+    <h2>nesgamelib.util</h2>
+    The util module is a set of functions for loading resources.
+    
+    <blockquote>
+        <b>util.filepath(path)</b><br/>
+        Takes a path, e.g. "path/to/file.txt", and converts its slashes to your system's using os.path.join. It's basically a quicker and easier version of os.path.join.
+    </blockquote>
+    <blockquote>
+        <b>util.load_image(filename)</b><br/>
+        Loads an image, and caches it. If it's already been loaded, then it will return the previously loaded image. <code>filename</code> should be a path to the image, e.g. <code>"data/image.png"</code> or <code>"data\image.png"</code>. Its slashes are converted to your system path's using the filename function.
+    </blockquote>
+    <blockquote>
+        <b>util.play_sound(filename, volume=1.0)</b><br/>
+        Plays a sound, and caches it. <code>volume</code> should be the volume of the sound, anything from 0.0 to 1.0. <code>filename</code> should again be a path to the file, which is ran through the filepath function.
+    </blockquote>
+    <blockquote>
+        <b>util.play_music(filename, loop=0, volume=1.0)</b><br/>
+        Plays a music file. If you want it to loop, set <code>loop</code> to -1. <code>volume</code> is the volume of the music, anything from 0.0 to 1.0. <code>filename</code> should again be a path to the file, which is ran through the filepath function.
+    </blockquote>
+    
+    
+    <!-- Footer/Copyright Notice -->
+    <br/><br/>
+    <center>Copyright &copy; 2009, pymike and saluk</center>
+
+</body>
+
+</html>
