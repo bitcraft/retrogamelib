@@ -1,4 +1,4 @@
-NES Game Library
+Retro Game Library
 ~-~-~-~-~-~-~-~-~-~-~-~
 
  A Python Library for creating NES/GameBoy style games.
@@ -6,12 +6,12 @@ NES Game Library
  
  Team Members:
     pymike - http://pymike.pynguins.com/
-    saluk  - 
+    saluk
 
 About
 ~-~-~-~-~-~-~-~-~-~-~-~
 
-  NESGameLib is a Python library for creating NES and GameBoy style 
+  RetroGameLib is a Python library for creating NES and GameBoy style 
  games with PyGame. It features window scaling, a button module with 
  synced keyboard and gamepad support, and lots of useful modules
  for aiding in the creation of authentic retro games, while still
@@ -20,11 +20,9 @@ About
 License
 ~-~-~-~-~-~-~-~-~-~-~-~
 
- This library was released under the GNU Lesser General Public License.
+ This library is released under the GNU Lesser General Public License.
  
- NES and GameBoy are copyright by Nintendo - http://nintendo.com/.
- 
- NESGameLib - A library for creating NES and GameBoy style games
+ RetroGameLib - A library for creating NES and GameBoy style games
  Copyright (C) 2009 pymike and saluk
 
  This library is free software; you can redistribute it and/or
