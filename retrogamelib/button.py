@@ -64,7 +64,7 @@ class Handler(object):
             if e.type == pygame.JOYBUTTONUP:
                 if e.button in self.held["joy"]:
                     self.held["joy"].remove(e.button)
-                    self.released["joy"].append(e.key)
+                    self.released["joy"].append(e.button)
             if e.type == pygame.JOYHATMOTION:
                 vals = []
                 if e.value[0]<0:
