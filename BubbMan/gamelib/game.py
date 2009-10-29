@@ -24,12 +24,16 @@ class Game(object):
     
     def __init__(self):
         
+        # Create some groups to hold the game objects.
         self.objects = gameobject.Group()
         self.coins = gameobject.Group()
         self.baddies = gameobject.Group()
         self.dead = gameobject.Group()
         self.springs = gameobject.Group()
+        self.punches = gameobject.Group()
         
+        # Preset the classes' groups so that they're added automatically 
+        # each time you create one. No hassle, very clean.
         Player.groups = [self.objects]
         Platform.groups = [self.objects]
         Coin.groups = [self.objects, self.coins]
@@ -38,8 +42,13 @@ class Game(object):
         Baddie.groups = [self.objects, self.baddies]
         Death.groups = [self.objects, self.dead]
         Spring.groups = [self.objects, self.springs]
+        Punch.groups = [self.objects, self.punches]
+        BaddieDeath.groups = [self.objects]
         
+        # Create a Gameboy-style font
         self.font = font.Font(GAMEBOY_FONT, (50, 50, 50))
+        
+        # Preload some of the game images
         self.background = load_image("data/background.png")
         self.lifeicon = load_image("data/head.png")
         
@@ -183,12 +192,19 @@ class Game(object):
         
         # Will you live, or die?
         for b in self.baddies:
+            for p in self.punches:
+                if p.rect.colliderect(b.rect):
+                    b.kill()
+                    self.score += 50
+                    Points(50, b.rect.center, self.font)
+                    BaddieDeath(b, b.rect.center)
+                    play_sound("data/pounce.ogg")
             if self.player.rect.colliderect(b.rect):
                 if self.player.jump_speed > 0 and \
                     self.player.rect.bottom < b.rect.top+10 and \
                     b.alive():
                     b.kill()
-                    Poof(b.rect.center)
+                    BaddieDeath(b, b.rect.center)
                     self.player.jump_speed = -3
                     self.player.rect.bottom = b.rect.top-1
                     play_sound("data/pounce.ogg")

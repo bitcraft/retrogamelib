@@ -99,6 +99,8 @@ class Player(Collidable):
         self.right_images = [
             load_image("data/bubbman-1.png"),
             load_image("data/bubbman-2.png"),
+            load_image("data/bubbman-4.png"),
+            load_image("data/bubbman-5.png"),
         ]
         self.left_images = []
         for img in self.right_images:
@@ -112,8 +114,13 @@ class Player(Collidable):
         self.jump_speed = 0
         self.frame = 0
         self.jumping = True
+        self.punch_time = 0
         self.offsetx = -5
         self.z = 0
+    
+    def punch(self):
+        if self.punch_time <= 0:
+            self.punch_time = 5
     
     def on_collision(self, dx, dy):        
         if dy > 0 or dy < 0:            
@@ -124,21 +131,25 @@ class Player(Collidable):
     def update(self, tiles):
         self.frame += 1
         imgframe = 0
+        if self.punch_time > 0:
+            self.punch_time -= 1
         
         moving = False
-        if button.is_held(LEFT):
+        if button.is_held(LEFT) and self.punch_time <= 0:
             self.facing = -1
             moving = True
             self.move(-2, 0, tiles)
-        if button.is_held(RIGHT):
+        if button.is_held(RIGHT) and self.punch_time <= 0:
             self.facing = 1
             moving = True
             self.move(2, 0, tiles)
-        if button.is_pressed(A_BUTTON):
+        if button.is_pressed(A_BUTTON) and self.punch_time <= 0:
             if not self.jumping:
                 play_sound("data/jump.ogg")
                 self.jump_speed = -5
                 self.jumping = True
+        if button.is_pressed(B_BUTTON):
+            self.punch()
         
         if self.facing < 0:
             self.images = self.left_images
@@ -149,6 +160,13 @@ class Player(Collidable):
             imgframe = self.frame/3%2
         if self.jumping:
             imgframe = 1
+        if self.punch_time > 0:
+            imgframe = 3
+        if self.punch_time == 3:
+            Punch(self)
+            play_sound("data/swoosh.ogg")
+        if self.punch_time > 3:
+            imgframe = 2
         
         self.image = self.images[imgframe]
         
@@ -159,9 +177,30 @@ class Player(Collidable):
         if self.jump_speed > 5:
             self.jump_speed = 5
         
-        self.move(0, self.jump_speed, tiles)
+        if self.punch_time <= 0:
+            self.move(0, self.jump_speed, tiles)
         if self.jump_speed > 3:
             self.jumping = True
+
+class Punch(Collidable):
+    
+    def __init__(self, player):
+        Collidable.__init__(self)
+        self.image = pygame.Surface((1, 1))
+        self.image.set_alpha(0)
+        self.rect = pygame.Rect(0, 0, 12, 12)
+        self.life = 2
+        self.player = player
+        self.always_update = True
+    
+    def update(self, tiles):
+        gameobject.Object.update(self)
+        self.rect.center = (self.player.rect.centerx + (8*self.player.facing), self.player.rect.centery)
+        self.life -= 1
+        if self.life <= 0:
+            self.rect.centerx += self.player.facing*4
+            Poof(self.rect.center)
+            self.kill()
 
 class Platform(Collidable):
     
@@ -236,7 +275,8 @@ class Points(Collidable):
         Collidable.__init__(self)
         self.image = font.render("%d" % score)
         self.rect = self.image.get_rect(center = pos)
-        self.life = 10
+        self.life = 20
+        self.z = 10
     
     def update(self, tiles):
         self.life -= 1
@@ -260,6 +300,21 @@ class Poof(Collidable):
         self.frame += 1
         self.image = self.images[self.frame/2%3]
         if self.frame >= 6:
+            self.kill()
+
+class BaddieDeath(Collidable):
+    
+    def __init__(self, baddie, pos):
+        Collidable.__init__(self)
+        self.image = pygame.transform.flip(baddie.image, 0, 1)
+        self.rect = self.image.get_rect(center = pos)
+        self.frame = 0
+        self.dy = -3
+    
+    def update(self, tiles):
+        self.dy += 0.5
+        self.rect.y += self.dy
+        if self.rect.y > 200:
             self.kill()
 
 class Death(Collidable):

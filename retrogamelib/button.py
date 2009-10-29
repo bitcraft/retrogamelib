@@ -43,6 +43,7 @@ class Handler(object):
         
         self.events = pygame.event.get()
         self.pressed = {"key": [], "joy": [], "dpad": []}
+        self.released = {"key": [], "joy": [], "dpad": []}
         for e in self.events:
             if e.type == pygame.QUIT:
                 pygame.quit()
@@ -56,12 +57,14 @@ class Handler(object):
             if e.type == pygame.KEYUP:
                 if e.key in self.held["key"]:
                     self.held["key"].remove(e.key)
+                    self.released["key"].append(e.key)
             if e.type == pygame.JOYBUTTONDOWN:
                 self.pressed["joy"].append(e.button)
                 self.held["joy"].append(e.button)
             if e.type == pygame.JOYBUTTONUP:
                 if e.button in self.held["joy"]:
                     self.held["joy"].remove(e.button)
+                    self.released["joy"].append(e.key)
             if e.type == pygame.JOYHATMOTION:
                 vals = []
                 if e.value[0]<0:
@@ -75,6 +78,7 @@ class Handler(object):
                 for b in ["dleft", "dright", "dup", "ddown"]:
                     if b in self.held["dpad"]:
                         self.held["dpad"].remove(b)
+                        self.released["dpad"].append(b)
                 else:
                     for v in vals:
                         self.pressed["dpad"].append(v)
@@ -114,9 +118,23 @@ class Handler(object):
                     return True
         return False
 
+    def is_released(self, value):
+        """Check if a button is being released. -> return bool
+        """
+        
+        if value in self.bound.iterkeys():
+            bound = self.bound[value]
+        
+        for key in self.held.iterkeys():
+            for i in self.released[key]:
+                if i in bound:
+                    return True
+        return False
+
 handler = Handler()
 handle_input = handler.handle_input
 is_pressed = handler.is_pressed
+is_released = handler.is_released
 is_held = handler.is_held
 
 def test():
