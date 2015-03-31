@@ -5,7 +5,7 @@ for file in os.listdir("source"):
         continue
     if file == ".svn":
         continue
-    f = open("source/"+file, "rb")
+    f = open("source/" + file, "rb")
     txt = f.read().replace("..NAV", nav)
     f.close()
     f = open(file, "wb")

@@ -3,9 +3,11 @@
 # Gamebub - a GameBoy type platformer
 # All code and assets are Copyright (C) 2009.
 
-import pygame
 import os
 import sys
+
+import pygame
+
 
 sys.path.insert(0, "..")
 from retrogamelib import display
@@ -20,10 +22,11 @@ from objects import *
 from tileengine import *
 from levels import *
 
-class Game(object):
-    
+
+class Game:
+
     def __init__(self):
-        
+
         # Create some groups to hold the game objects.
         self.objects = gameobject.Group()
         self.coins = gameobject.Group()
@@ -31,8 +34,8 @@ class Game(object):
         self.dead = gameobject.Group()
         self.springs = gameobject.Group()
         self.punches = gameobject.Group()
-        
-        # Preset the classes' groups so that they're added automatically 
+
+        # Preset the classes' groups so that they're added automatically
         # each time you create one. No hassle, very clean.
         Player.groups = [self.objects]
         Platform.groups = [self.objects]
@@ -44,19 +47,19 @@ class Game(object):
         Spring.groups = [self.objects, self.springs]
         Punch.groups = [self.objects, self.punches]
         BaddieDeath.groups = [self.objects]
-        
+
         # Create a Gameboy-style font
         self.font = font.Font(GAMEBOY_FONT, (50, 50, 50))
-        
+
         # Preload some of the game images
         self.background = load_image("data/background.png")
         self.lifeicon = load_image("data/head.png")
-        
+
         self.score = 0
         self.level = 1
         self.lives = 5
         self.show_win_screen = False
-        
+
         self.engine = TileEngine()
         self.camera = pygame.Rect(0, 0, GBRES[0], GBRES[1])
 
@@ -78,7 +81,7 @@ class Game(object):
             self.lives -= 1
             self.player.kill()
             Death(self.player.rect.center)
-            #pygame.mixer.music.stop()
+            # pygame.mixer.music.stop()
             play_sound("data/die.ogg")
 
     def win(self):
@@ -97,7 +100,7 @@ class Game(object):
             screen = display.get_surface()
             screen.blit(splash, (0, 0))
             ren = self.font.render("You reached Oliland!")
-            screen.blit(ren, (80-ren.get_width()/2, pos))
+            screen.blit(ren, (80 - ren.get_width() / 2, pos))
             display.update()
         self.playing = False
 
@@ -117,7 +120,7 @@ class Game(object):
             screen = display.get_surface()
             screen.blit(splash, (0, 0))
             ren = self.font.render("Game over!")
-            screen.blit(ren, (80-ren.get_width()/2, pos))
+            screen.blit(ren, (80 - ren.get_width() / 2, pos))
             display.update()
         self.playing = False
         self.won = False
@@ -130,8 +133,8 @@ class Game(object):
             button.handle_input()
             ren = self.font.render("PAUSED")
             screen = display.get_surface()
-            screen.blit(ren, (80-ren.get_width()/2, 
-                74-ren.get_height()/2))
+            screen.blit(ren, (80 - ren.get_width() / 2,
+                              74 - ren.get_height() / 2))
             display.update()
         play_sound("data/pause.ogg")
         pygame.mixer.music.unpause()
@@ -139,49 +142,48 @@ class Game(object):
     def loop(self):
         self.playing = True
         while self.playing:
-            
-           self.handle_input()
-           self.update()
-           self.draw()
-    
+            self.handle_input()
+            self.update()
+            self.draw()
+
     def handle_input(self):
         button.handle_input()
         if button.is_pressed(START):
             self.pause()
         if button.is_pressed(A_BUTTON) and button.is_held(SELECT):
             self.playing = False
-            
+
     def update(self):
         clock.tick()
         for object in self.objects:
-            if (object.rect.right >= self.camera.left and \
-                object.rect.left <= self.camera.right) or \
-                object.always_update == True:
+            if (object.rect.right >= self.camera.left and
+                    object.rect.left <= self.camera.right) or \
+                    object.always_update == True:
                 object.update(self.engine.tiles)
                 object.always_update = True
-        
+
         # Move the camera
         self.camera.centerx = self.player.rect.centerx
         if self.camera.left < 0:
             self.camera.left = 0
-        if self.camera.right > len(self.engine.tiles[0])*16:
-            self.camera.right = len(self.engine.tiles[0])*16
-        
+        if self.camera.right > len(self.engine.tiles[0]) * 16:
+            self.camera.right = len(self.engine.tiles[0]) * 16
+
         # Check if we won the level
-        if self.player.rect.left > len(self.engine.tiles[0])*16:
-            if len(LEVELS) == self.level-1:
+        if self.player.rect.left > len(self.engine.tiles[0]) * 16:
+            if len(LEVELS) == self.level - 1:
                 self.win()
             else:
                 self.playing = False
-        
+
         # Check if we fell off a cliff
-        if self.player.rect.top > len(self.engine.tiles)*16:
+        if self.player.rect.top > len(self.engine.tiles) * 16:
             self.kill_player()
-        
+
         # Make sure we don't move off the far left of the level
         if self.player.rect.left < 0:
             self.player.rect.left = 0
-        
+
         # Get rich quick!
         for c in self.coins:
             if self.player.rect.colliderect(c.rect):
@@ -189,7 +191,7 @@ class Game(object):
                 self.score += 25
                 Poof(c.rect.center)
                 play_sound("data/coin.ogg")
-        
+
         # Will you live, or die?
         for b in self.baddies:
             for p in self.punches:
@@ -201,19 +203,19 @@ class Game(object):
                     play_sound("data/pounce.ogg")
             if self.player.rect.colliderect(b.rect):
                 if self.player.jump_speed > 0 and \
-                    self.player.rect.bottom < b.rect.top+10 and \
-                    b.alive():
+                    self.player.rect.bottom < b.rect.top + 10 and \
+                        b.alive():
                     b.kill()
                     BaddieDeath(b, b.rect.center)
                     self.player.jump_speed = -3
-                    self.player.rect.bottom = b.rect.top-1
+                    self.player.rect.bottom = b.rect.top - 1
                     play_sound("data/pounce.ogg")
                     self.score += 50
                     Points(50, b.rect.center, self.font)
                 else:
                     if b.alive():
                         self.kill_player()
-        
+
         # Boinnnng!
         for s in self.springs:
             if self.player.rect.colliderect(s.rect):
@@ -223,25 +225,25 @@ class Game(object):
                         play_sound("data/bounce.ogg")
                     s.bounce()
                     self.player.jumping = True
-    
+
     def draw(self):
         screen = display.get_surface()
 
         screen.fill(GB_SCREEN_COLOR)
-        screen.blit(self.background, ((-self.camera.x/2) % 160, 0))
-        screen.blit(self.background, (((-self.camera.x/2) - 160) % -160, 0))
-        screen.blit(self.background, (((-self.camera.x/2) + 160) % 160, 0))
+        screen.blit(self.background, ((-self.camera.x / 2) % 160, 0))
+        screen.blit(self.background, (((-self.camera.x / 2) - 160) % -160, 0))
+        screen.blit(self.background, (((-self.camera.x / 2) + 160) % 160, 0))
 
         for object in self.objects:
             object.draw(screen, self.camera)
-        
+
         ren = self.font.render("score    level      x%d" % self.lives)
         screen.blit(ren, (4, 4))
-        ren = self.font.render("%06d    %d-1" % (self.score, self.level-1))
+        ren = self.font.render("%06d    %d-1" % (self.score, self.level - 1))
         screen.blit(ren, (4, 14))
-        screen.blit(self.lifeicon, (160-30, 2))
-        
+        screen.blit(self.lifeicon, (160 - 30, 2))
+
         if not self.player.alive() and not self.dead:
-            self.start_level(LEVELS[self.level-2])
-        
+            self.start_level(LEVELS[self.level - 2])
+
         display.update()

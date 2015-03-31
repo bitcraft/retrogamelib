@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-'''Helper script for bundling up a game in a ZIP file.
+"""Helper script for bundling up a game in a ZIP file.
 
 This script will bundle all game files into a ZIP file which is named as
 per the argument given on the command-line. The ZIP file will unpack into a
@@ -11,16 +11,16 @@ The script ignores:
 - any dotfiles (files starting with ".")
 - .pyc and .pyo files
 
-'''
+"""
 
 import sys
 import os
 import zipfile
 
 if len(sys.argv) != 2:
-    print '''Usage: python %s <release filename-version>
+    print("""Usage: python %s <release filename-version>
 
-eg. python %s my_cool_game-1.0'''%(sys.argv[0], sys.argv[0])
+eg. python %s my_cool_game-1.0""" % (sys.argv[0], sys.argv[0]))
     sys.exit()
 
 base = sys.argv[1]
@@ -30,7 +30,8 @@ try:
     package = zipfile.ZipFile(zipname, 'w', zipfile.ZIP_DEFLATED)
 except RuntimeError:
     package = zipfile.ZipFile(zipname, 'w')
-print zipname
+print(zipname)
+
 
 # utility for adding subdirectories
 def add_files(generator):
@@ -40,11 +41,15 @@ def add_files(generator):
                 dirnames.remove(name)
 
         for name in filenames:
-            if name.startswith('.') or name == zipname: continue
+            if name.startswith('.') or name == zipname:
+                continue
             suffix = os.path.splitext(name)[1]
-            if suffix in ('.pyc', '.pyo', ".txt~"): continue
-            if name[0] == '.': continue
-            if name == "create-upload.py": continue
+            if suffix in ('.pyc', '.pyo', ".txt~"):
+                continue
+            if name[0] == '.':
+                continue
+            if name == "create-upload.py":
+                continue
             filename = os.path.join(dirpath, name)
             package.write(filename, os.path.join(base, filename))
 
@@ -54,7 +59,8 @@ add_files(os.walk('../' + curdir))
 
 # calculate MD5
 import hashlib
+
 d = hashlib.md5()
 d.update(file(zipname, 'rb').read())
-print 'Created', zipname
-print 'MD5 hash:', d.hexdigest()
+print('Created', zipname)
+print('MD5 hash:', d.hexdigest())

@@ -3,8 +3,6 @@
 # Gamebub - a GameBoy type platformer
 # All code and assets are Copyright (C) 2009.
 
-import pygame
-import os
 import sys
 
 sys.path.insert(0, "..")
@@ -12,7 +10,6 @@ from retrogamelib import display
 from retrogamelib import button
 from retrogamelib import clock
 from retrogamelib import font
-from retrogamelib import gameobject
 from retrogamelib import dialog
 from retrogamelib.constants import *
 from retrogamelib.util import *
@@ -20,24 +17,24 @@ from retrogamelib.util import *
 from game import *
 from levels import *
 
+
 def run_menu():
-        
     timer = 0
     play_music("data/title.ogg")
     game = Game()
     set_global_sound_volume(0.75)
-    
+
     while 1:
         clock.tick()
         button.handle_input()
-        
+
         # If we pressed start, begin the game
         if button.is_pressed(START):
 
             play_music("data/algar-orka.xm", -1)
             whitefont = font.Font(GAMEBOY_FONT, GB_SCREEN_COLOR)
-            box = dialog.DialogBox((152, 46), (50, 50, 50), 
-                GB_SCREEN_COLOR, whitefont)
+            box = dialog.DialogBox((152, 46), (50, 50, 50),
+                                   GB_SCREEN_COLOR, whitefont)
             box.set_dialog([
                 "bubbman was on his way to oliland,",
                 "when his car broke down in the dododu mountains!",
@@ -54,8 +51,7 @@ def run_menu():
                 screen.blit(game.background, (0, 0))
                 box.draw(screen, (4, 4))
                 display.update()
-            
-            
+
             game.won = True
             game.level = 1
             game.lives = 5
@@ -68,7 +64,7 @@ def run_menu():
                 game.loop()
                 if not game.player.alive():
                     break
-            
+
             # If we got to the end of the game, display credits
             if game.won:
                 pos = 144
@@ -108,25 +104,25 @@ def run_menu():
                     "",
                     "",
                     " Thanks for playing!!"]
-                while pos > -144-(len(credits)*7):
+                while pos > -144 - (len(credits) * 7):
                     button.handle_input()
                     if button.is_pressed(START):
                         break
                     screen = display.get_surface()
                     screen.fill(GB_SCREEN_COLOR)
                     screen.blit(game.background, (0, 0))
-                    
+
                     clock.tick()
                     pos -= 0.5
                     y = 0
                     for c in credits:
                         ren = game.font.render(c)
-                        screen.blit(ren, (80-ren.get_width()/2, pos+y))
+                        screen.blit(ren, (80 - ren.get_width() / 2, pos + y))
                         y += 10
                     display.update()
-           
+
             play_music("data/title.ogg")
-        
+
         # Draw the main menu
         screen = display.get_surface()
         screen.fill(GB_SCREEN_COLOR)
@@ -135,6 +131,6 @@ def run_menu():
         timer += 1
         timer = timer % 30
         if timer < 15:
-            screen.blit(ren, (80-ren.get_width()/2, 
-                104-ren.get_height()/2))
+            screen.blit(ren, (80 - ren.get_width() / 2,
+                              104 - ren.get_height() / 2))
         display.update()
